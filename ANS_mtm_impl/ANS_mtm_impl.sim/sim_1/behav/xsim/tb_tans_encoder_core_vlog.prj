@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv" \
+"../../../../ANS_mtm_impl.srcs/sources_1/new/tb_tans_encoder_core.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
