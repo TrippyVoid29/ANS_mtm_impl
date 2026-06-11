@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Thu Jun 11 16:12:34 2026
+# Process ID: 18688
+# Current directory: C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.runs/ans_design_auto_pc_0_synth_1
+# Command line: vivado.exe -log ans_design_auto_pc_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ans_design_auto_pc_0.tcl
+# Log file: C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.runs/ans_design_auto_pc_0_synth_1/ans_design_auto_pc_0.vds
+# Journal file: C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.runs/ans_design_auto_pc_0_synth_1\vivado.jou
+# Running On: DESKTOP-223A9C1, OS: Windows, CPU Frequency: 2592 MHz, CPU Physical cores: 6, Host memory: 34099 MB
+#-----------------------------------------------------------
+source ans_design_auto_pc_0.tcl -notrace

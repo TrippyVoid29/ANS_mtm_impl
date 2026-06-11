@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Tue Jun  9 18:52:12 2026
+# Process ID: 10756
+# Current directory: C:/ANS_mtm_impl/ANS_mtm_impl
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17664 C:\ANS_mtm_impl\ANS_mtm_impl\ANS_mtm_impl.xpr
+# Log file: C:/ANS_mtm_impl/ANS_mtm_impl/vivado.log
+# Journal file: C:/ANS_mtm_impl/ANS_mtm_impl\vivado.jou
+# Running On: DESKTOP-223A9C1, OS: Windows, CPU Frequency: 2592 MHz, CPU Physical cores: 6, Host memory: 34099 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.xpr
+update_compile_order -fileset sources_1

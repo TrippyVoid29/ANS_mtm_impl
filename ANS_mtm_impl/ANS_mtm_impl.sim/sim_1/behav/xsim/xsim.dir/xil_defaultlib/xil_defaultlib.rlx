@@ -3,5 +3,7 @@
 Apr 18 2022
 16:05:34
 C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.sim/sim_1/behav/xsim/glbl.v,1649976174,verilog,,,,glbl,,uvm,,,,,,
-C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv,1779217409,systemVerilog,,C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tb_tans_encoder_core.sv,,tans_encoder_core,,uvm,,,,,,
+C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sim_1/new/tb_tans_axi_lite_wrapper.sv,1781182319,systemVerilog,,,,tb_tans_axi_lite_wrapper,,uvm,,,,,,
+C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_axi_lite_wrapper.sv,1781182250,systemVerilog,,C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv,,tans_axi_lite_wrapper,,uvm,,,,,,
+C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv,1779217409,systemVerilog,,C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sim_1/new/tb_tans_axi_lite_wrapper.sv,,tans_encoder_core,,uvm,,,,,,
 C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tb_tans_encoder_core.sv,1779217415,systemVerilog,,,,tb_tans_encoder_core,,uvm,,,,,,
