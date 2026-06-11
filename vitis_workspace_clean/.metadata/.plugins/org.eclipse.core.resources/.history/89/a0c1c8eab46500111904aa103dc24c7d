@@ -1,0 +1,75 @@
+#include "xil_io.h"
+#include "xil_printf.h"
+#include "sleep.h"
+
+#define ANS_BASEADDR   0x40000000U
+
+#define ANS_CTRL       0x00
+#define ANS_STATUS     0x04
+#define ANS_SYMBOL     0x08
+#define ANS_STATE_IN   0x0C
+#define ANS_STATE_OUT  0x10
+#define ANS_BITS_OUT   0x14
+#define ANS_NBITS_OUT  0x18
+#define ANS_TABLE_BASE 0x1000
+
+int main(void)
+{
+    xil_printf("ANS AXI-Lite test start\r\n");
+
+    u32 symbol = 0x41;      // 'A'
+    u32 state_in = 100;
+
+    /*
+     * Dla STATE_INDEX_WIDTH = 2:
+     * table_addr = {symbol, state_in[1:0]}
+     */
+    u32 table_index = (symbol << 2) | (state_in & 0x3);
+
+    u32 expected_state = 1234;
+    u32 expected_bits  = 0xAA;
+    u32 expected_nbits = 4;
+
+    /*
+     * Format table_data:
+     * [31:16] next_state
+     * [15:8]  bits_out
+     * [4:0]   nbits_out
+     */
+    u32 table_data = (expected_state << 16) |
+                     (expected_bits  << 8)  |
+                     expected_nbits;
+
+    Xil_Out32(ANS_BASEADDR + ANS_TABLE_BASE + 4 * table_index, table_data);
+
+    Xil_Out32(ANS_BASEADDR + ANS_SYMBOL, symbol);
+    Xil_Out32(ANS_BASEADDR + ANS_STATE_IN, state_in);
+
+    // clear done
+    Xil_Out32(ANS_BASEADDR + ANS_CTRL, 0x2);
+
+    // start
+    Xil_Out32(ANS_BASEADDR + ANS_CTRL, 0x1);
+
+    while ((Xil_In32(ANS_BASEADDR + ANS_STATUS) & 0x2) == 0) {
+        // wait for done
+    }
+
+    u32 state_out = Xil_In32(ANS_BASEADDR + ANS_STATE_OUT);
+    u32 bits_out  = Xil_In32(ANS_BASEADDR + ANS_BITS_OUT);
+    u32 nbits_out = Xil_In32(ANS_BASEADDR + ANS_NBITS_OUT);
+
+    xil_printf("state_out = %lu\r\n", state_out);
+    xil_printf("bits_out  = 0x%lx\r\n", bits_out);
+    xil_printf("nbits_out = %lu\r\n", nbits_out);
+
+    if (state_out == expected_state &&
+        bits_out == expected_bits &&
+        nbits_out == expected_nbits) {
+        xil_printf("TEST PASSED\r\n");
+    } else {
+        xil_printf("TEST FAILED\r\n");
+    }
+
+    return 0;
+}

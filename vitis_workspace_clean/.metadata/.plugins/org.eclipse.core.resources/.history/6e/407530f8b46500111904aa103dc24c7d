@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="ans_application" location="C:/Xilinx/Vitis/2022.1/bin/vitis_workspace_clean/ans_application" platform="C:/Xilinx/Vitis/2022.1/bin/vitis_workspace_clean/ans_platform/export/ans_platform/ans_platform.xpfm" platformUID="xilinx:zybo::0.0(custom)" systemProject="ans_application_system" sysConfig="ans_platform" runtime="C/C++" cpu="standalone_domain" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="c151781fbd68dc28adcf89cc747d116b">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.1783665670" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.1854898823" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>
