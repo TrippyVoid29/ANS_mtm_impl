@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "c:/ans_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.runs/synth_1/myip_axi_lite_v1_0.tcl"
+  variable script "C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.runs/synth_1/myip_axi_lite_v1_0.tcl"
   variable category "vivado_synth"
 }
 
@@ -76,18 +76,20 @@ create_project -in_memory -part xc7z010clg400-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir c:/ans_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.cache/wt [current_project]
-set_property parent.project_path c:/ans_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.xpr [current_project]
+set_property webtalk.parent_dir C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.cache/wt [current_project]
+set_property parent.project_path C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo c:/ans_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.cache/ip [current_project]
+set_property ip_repo_paths c:/ans_mtm_impl [current_project]
+update_ip_catalog
+set_property ip_output_repo c:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
-  C:/ANS_mtm_impl/ip_repo/myip_axi_lite_1.0/hdl/myip_axi_lite_v1_0_S00_AXI.v
-  C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv
-  C:/ANS_mtm_impl/ip_repo/myip_axi_lite_1.0/hdl/myip_axi_lite_v1_0.v
+  C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.srcs/sources_1/imports/ANS_mtm_impl/ip_repo/myip_axi_lite_1.0/hdl/myip_axi_lite_v1_0_S00_AXI.v
+  C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.srcs/sources_1/imports/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv
+  C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.srcs/sources_1/imports/ANS_mtm_impl/ip_repo/myip_axi_lite_1.0/hdl/myip_axi_lite_v1_0.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -99,6 +101,8 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental C:/ANS_mtm_impl/ip_repo/edit_myip_axi_lite_v1_0.srcs/utils_1/imports/synth_1/myip_axi_lite_v1_0.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

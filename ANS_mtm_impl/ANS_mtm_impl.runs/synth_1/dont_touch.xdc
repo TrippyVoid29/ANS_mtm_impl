@@ -4,11 +4,11 @@
 # Block Designs: bd/ans_design/ans_design.bd
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design || ORIG_REF_NAME==ans_design} -quiet] -quiet
 
-# IP: bd/ans_design/ip/ans_design_processing_system7_0_0/ans_design_processing_system7_0_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design_processing_system7_0_0 || ORIG_REF_NAME==ans_design_processing_system7_0_0} -quiet] -quiet
-
 # IP: bd/ans_design/ip/ans_design_myip_axi_lite_v1_0_0_0/ans_design_myip_axi_lite_v1_0_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design_myip_axi_lite_v1_0_0_0 || ORIG_REF_NAME==ans_design_myip_axi_lite_v1_0_0_0} -quiet] -quiet
+
+# IP: bd/ans_design/ip/ans_design_processing_system7_0_0/ans_design_processing_system7_0_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design_processing_system7_0_0 || ORIG_REF_NAME==ans_design_processing_system7_0_0} -quiet] -quiet
 
 # IP: bd/ans_design/ip/ans_design_ps7_0_axi_periph_0/ans_design_ps7_0_axi_periph_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design_ps7_0_axi_periph_0 || ORIG_REF_NAME==ans_design_ps7_0_axi_periph_0} -quiet] -quiet
@@ -18,5 +18,16 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design_
 
 # IP: bd/ans_design/ip/ans_design_auto_pc_0/ans_design_auto_pc_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==ans_design_auto_pc_0 || ORIG_REF_NAME==ans_design_auto_pc_0} -quiet] -quiet
+
+# XDC: c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_processing_system7_0_0/ans_design_processing_system7_0_0.xdc
+set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==ans_design_processing_system7_0_0 || ORIG_REF_NAME==ans_design_processing_system7_0_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
+
+# XDC: c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_rst_ps7_0_100M_0/ans_design_rst_ps7_0_100M_0_board.xdc
+set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==ans_design_rst_ps7_0_100M_0 || ORIG_REF_NAME==ans_design_rst_ps7_0_100M_0} -quiet] {/U0 } ]/U0 ] -quiet] -quiet
+
+# XDC: c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_rst_ps7_0_100M_0/ans_design_rst_ps7_0_100M_0.xdc
+#dup# set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==ans_design_rst_ps7_0_100M_0 || ORIG_REF_NAME==ans_design_rst_ps7_0_100M_0} -quiet] {/U0 } ]/U0 ] -quiet] -quiet
+
+# XDC: c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_auto_pc_0/ans_design_auto_pc_0_ooc.xdc
 
 # XDC: c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ans_design_ooc.xdc

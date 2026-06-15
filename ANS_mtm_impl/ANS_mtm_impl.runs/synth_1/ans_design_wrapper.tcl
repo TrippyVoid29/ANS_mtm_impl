@@ -71,9 +71,8 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 3
-set_msg_config -id {HDL-1065} -limit 10000
 OPTRACE "Creating in-memory project" START { }
-create_project -in_memory -part xc7z010clg400-1
+create_project -in_memory -part xc7z020clg484-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
@@ -85,7 +84,7 @@ set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part_repo_paths {C:/Users/Micha³/AppData/Roaming/Xilinx/Vivado/2022.1/xhub/board_store/xilinx_board_store} [current_project]
-set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
+set_property board_part avnet.com:zedboard:part0:1.4 [current_project]
 set_property ip_repo_paths {
   c:/ANS_mtm_impl/ip_repo/myip_axi_lite_1.0
   c:/ANS_mtm_impl/ip_repo/myip_AXI_lite_1.0
@@ -95,12 +94,11 @@ set_property ip_output_repo c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.cache/ip [
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/hdl/ans_design_wrapper.v
+read_verilog -library xil_defaultlib C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/hdl/ans_design_wrapper.v
 add_files C:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/bd/ans_design/ans_design.bd
 set_property used_in_implementation false [get_files -all c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_processing_system7_0_0/ans_design_processing_system7_0_0.xdc]
 set_property used_in_implementation false [get_files -all c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_rst_ps7_0_100M_0/ans_design_rst_ps7_0_100M_0_board.xdc]
 set_property used_in_implementation false [get_files -all c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_rst_ps7_0_100M_0/ans_design_rst_ps7_0_100M_0.xdc]
-set_property used_in_implementation false [get_files -all c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_rst_ps7_0_100M_0/ans_design_rst_ps7_0_100M_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ip/ans_design_auto_pc_0/ans_design_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/ANS_mtm_impl/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design/ans_design_ooc.xdc]
 
@@ -121,7 +119,7 @@ read_checkpoint -auto_incremental -incremental C:/ANS_mtm_impl/ANS_mtm_impl/ANS_
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top ans_design_wrapper -part xc7z010clg400-1
+synth_design -top ans_design_wrapper -part xc7z020clg484-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

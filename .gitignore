@@ -216,3 +216,50 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Vivado / Xilinx generated files
+*.jou
+*.log
+*.str
+*.dmp
+*.wdb
+*.wcfg
+*.pb
+*.backup.jou
+
+# Vivado generated directories
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.runs/
+*.gen/
+
+# Vivado project artifacts in this repo
+ANS_mtm_impl/ANS_mtm_impl.cache/
+ANS_mtm_impl/ANS_mtm_impl.hw/
+ANS_mtm_impl/ANS_mtm_impl.ip_user_files/
+ANS_mtm_impl/ANS_mtm_impl.sim/
+ANS_mtm_impl/ANS_mtm_impl.runs/
+ANS_mtm_impl/ANS_mtm_impl.gen/
+ANS_mtm_impl/vivado*.jou
+ANS_mtm_impl/vivado*.str
+
+# IP edit project generated artifacts
+ip_repo/edit_myip_axi_lite_v1_0.cache/
+ip_repo/edit_myip_axi_lite_v1_0.hw/
+ip_repo/edit_myip_axi_lite_v1_0.ip_user_files/
+ip_repo/edit_myip_axi_lite_v1_0.runs/
+
+# Vitis workspace noise
+vitis_workspace_clean/.metadata/
+vitis_workspace_clean/.analytics
+vitis_workspace_clean/RemoteSystemsTempFiles/
+vitis_workspace_clean/**/_ide/
+vitis_workspace_clean/**/Debug/
+vitis_workspace_clean/**/Release/
+vitis_workspace_clean/**/*.o
+vitis_workspace_clean/**/*.d
+vitis_workspace_clean/**/*.elf
+vitis_workspace_clean/**/*.map
+vitis_workspace_clean/**/*.bin

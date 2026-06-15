@@ -1,7 +1,7 @@
 //Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2022.1 (win64) Build 3526262 Mon Apr 18 15:48:16 MDT 2022
-//Date        : Thu Jun 11 16:12:00 2026
+//Date        : Mon Jun 15 14:38:45 2026
 //Host        : DESKTOP-223A9C1 running 64-bit major release  (build 9200)
 //Command     : generate_target ans_design.bd
 //Design      : ans_design
@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "ans_design,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=ans_design,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=6,numReposBlks=4,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=1,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "ans_design.hwdef" *) 
+(* CORE_GENERATION_INFO = "ans_design,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=ans_design,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=6,numReposBlks=4,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=1,da_ps7_cnt=1,synth_mode=Global}" *) (* HW_HANDOFF = "ans_design.hwdef" *) 
 module ans_design
    (DDR_addr,
     DDR_ba,
@@ -138,12 +138,12 @@ module ans_design
 
   ans_design_myip_axi_lite_v1_0_0_0 myip_axi_lite_v1_0_0
        (.s00_axi_aclk(processing_system7_0_FCLK_CLK0),
-        .s00_axi_araddr(ps7_0_axi_periph_M00_AXI_ARADDR[3:0]),
+        .s00_axi_araddr(ps7_0_axi_periph_M00_AXI_ARADDR[12:0]),
         .s00_axi_aresetn(rst_ps7_0_100M_peripheral_aresetn),
         .s00_axi_arprot(ps7_0_axi_periph_M00_AXI_ARPROT),
         .s00_axi_arready(ps7_0_axi_periph_M00_AXI_ARREADY),
         .s00_axi_arvalid(ps7_0_axi_periph_M00_AXI_ARVALID),
-        .s00_axi_awaddr(ps7_0_axi_periph_M00_AXI_AWADDR[3:0]),
+        .s00_axi_awaddr(ps7_0_axi_periph_M00_AXI_AWADDR[12:0]),
         .s00_axi_awprot(ps7_0_axi_periph_M00_AXI_AWPROT),
         .s00_axi_awready(ps7_0_axi_periph_M00_AXI_AWREADY),
         .s00_axi_awvalid(ps7_0_axi_periph_M00_AXI_AWVALID),
