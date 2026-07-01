@@ -2,50 +2,27 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Wed Jul  1 20:31:07 2026
-# Process ID: 10064
+# Start of session at: Thu Jul  2 00:11:29 2026
+# Process ID: 1808
 # Current directory: D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15896 D:\AGH_Studia\magisterka\sem_1\SDUP\ANS_prj\ANS_mtm_impl\ANS_mtm_impl.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16276 D:\AGH_Studia\magisterka\sem_1\SDUP\ANS_prj\ANS_mtm_impl\ANS_mtm_impl.xpr
 # Log file: D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/vivado.log
 # Journal file: D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl\vivado.jou
 # Running On: DESKTOP-H35415B, OS: Windows, CPU Frequency: 3294 MHz, CPU Physical cores: 12, Host memory: 14877 MB
 #-----------------------------------------------------------
 start_gui
 open_project D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.xpr
-launch_simulation
-source tb_tANS_system.tcl
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-relaunch_sim
-run 10 us
-run 10 us
-stop
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sim_1/new/tb_tANS_decoder_fsm_256.sv
 # Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
 set_property source_mgmt_mode None [current_project]
-set_property top tb_tANS_encoder_fsm_256 [get_filesets sim_1]
+set_property top tb_tANS_decoder_fsm_256 [get_filesets sim_1]
 set_property top_lib xil_defaultlib [get_filesets sim_1]
 # Re-enabling previously disabled source management mode.
 set_property source_mgmt_mode DisplayOnly [current_project]
 launch_simulation
-close_sim
 launch_simulation
-source tb_tANS_encoder_fsm_256.tcl
-run 10 us
-relaunch_sim
-run 10 us
-relaunch_sim
-run 10 us
-relaunch_sim
-relaunch_sim
-run 10 us
-close_sim
 launch_simulation
-source tb_tANS_encoder_fsm_256.tcl
-run 10 us
-relaunch_sim
-run 10 us
-relaunch_sim
+launch_simulation
+source tb_tANS_decoder_fsm_256.tcl
 run 10 us
