@@ -13,6 +13,9 @@ module tb_tANS_encoder_fsm_256;
     logic       bit_out;
     logic       bit_valid;
     logic       ready;
+    
+    logic [8:0] final_state;
+    logic [32:0] bitstream;
 
     tANS_encoder_fsm_256 #(
         .R(4),
@@ -26,7 +29,9 @@ module tb_tANS_encoder_fsm_256;
         .symbol_valid(symbol_valid),
         .bit_out(bit_out),
         .bit_valid(bit_valid),
-        .ready(ready)
+        .ready(ready),
+        .final_state(final_state),
+        .bitstream(bitstream)
     );
 
     initial begin
@@ -50,15 +55,21 @@ module tb_tANS_encoder_fsm_256;
         start_init = 1;
         #10 start_init = 0;
 
-        #15000;
         wait(ready == 1'b1);
         $display("[%0t] Inicjalizacja zakonczona. Uklad gotowy (READY).", $time);
-        start_encode = 1;
-        #20; 
-        start_encode = 0;
-        #10;
 
-
+        encode_symbol(2'd0, "A"); // 1 znak
+        encode_symbol(2'd2, "C"); // 2 znak
+        encode_symbol(2'd1, "B"); // 3 znak
+        encode_symbol(2'd3, "D"); // 4 znak
+        encode_symbol(2'd0, "A"); // 1 znak
+        encode_symbol(2'd2, "C"); // 2 znak
+        encode_symbol(2'd1, "B"); // 3 znak
+        encode_symbol(2'd3, "D"); // 4 znak
+        encode_symbol(2'd0, "A"); // 1 znak
+        encode_symbol(2'd2, "C"); // 2 znak
+        encode_symbol(2'd1, "B"); // 3 znak
+        encode_symbol(2'd3, "D"); // 4 znak
         encode_symbol(2'd0, "A"); // 1 znak
         encode_symbol(2'd2, "C"); // 2 znak
         encode_symbol(2'd1, "B"); // 3 znak

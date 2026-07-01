@@ -2,29 +2,50 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Wed Jul  1 12:59:32 2026
-# Process ID: 15052
+# Start of session at: Wed Jul  1 20:31:07 2026
+# Process ID: 10064
 # Current directory: D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18356 D:\AGH_Studia\magisterka\sem_1\SDUP\ANS_prj\ANS_mtm_impl\ANS_mtm_impl.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15896 D:\AGH_Studia\magisterka\sem_1\SDUP\ANS_prj\ANS_mtm_impl\ANS_mtm_impl.xpr
 # Log file: D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/vivado.log
 # Journal file: D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl\vivado.jou
 # Running On: DESKTOP-H35415B, OS: Windows, CPU Frequency: 3294 MHz, CPU Physical cores: 12, Host memory: 14877 MB
 #-----------------------------------------------------------
 start_gui
 open_project D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.xpr
-open_bd_design {D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/bd/ans_design/ans_design.bd}
-export_ip_user_files -of_objects  [get_files D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/bd/ans_design/ans_design.bd] -no_script -reset -force -quiet
-remove_files  D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/bd/ans_design/ans_design.bd
-file delete -force D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/bd/ans_design
-file delete -force d:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.gen/sources_1/bd/ans_design
-export_ip_user_files -of_objects  [get_files D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sim_1/new/tb_tans_axi_lite_wrapper.sv] -no_script -reset -force -quiet
-remove_files  -fileset sim_1 D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sim_1/new/tb_tans_axi_lite_wrapper.sv
-file delete -force D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sim_1/new/tb_tans_axi_lite_wrapper.sv
-export_ip_user_files -of_objects  [get_files D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv] -no_script -reset -force -quiet
-remove_files  D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv
-file delete -force D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_encoder_core.sv
-export_ip_user_files -of_objects  [get_files D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tb_tans_encoder_core.sv] -no_script -reset -force -quiet
-remove_files  -fileset sim_1 D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tb_tans_encoder_core.sv
-export_ip_user_files -of_objects  [get_files D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_axi_lite_wrapper.sv] -no_script -reset -force -quiet
-remove_files  D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_axi_lite_wrapper.sv
-file delete -force D:/AGH_Studia/magisterka/sem_1/SDUP/ANS_prj/ANS_mtm_impl/ANS_mtm_impl.srcs/sources_1/new/tans_axi_lite_wrapper.sv
+launch_simulation
+source tb_tANS_system.tcl
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+relaunch_sim
+run 10 us
+run 10 us
+stop
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top tb_tANS_encoder_fsm_256 [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+close_sim
+launch_simulation
+source tb_tANS_encoder_fsm_256.tcl
+run 10 us
+relaunch_sim
+run 10 us
+relaunch_sim
+run 10 us
+relaunch_sim
+relaunch_sim
+run 10 us
+close_sim
+launch_simulation
+source tb_tANS_encoder_fsm_256.tcl
+run 10 us
+relaunch_sim
+run 10 us
+relaunch_sim
+run 10 us

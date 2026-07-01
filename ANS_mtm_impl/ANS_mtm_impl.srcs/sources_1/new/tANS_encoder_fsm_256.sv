@@ -15,7 +15,8 @@ module tANS_encoder_fsm_256 #(
     output logic       bit_out,
     output logic       bit_valid,
     output logic       ready,
-    output logic [8:0] final_state
+    output logic [8:0] final_state,
+    output logic [32:0] bitstream
 );
 
     localparam int STEP = 163; 
@@ -52,9 +53,11 @@ module tANS_encoder_fsm_256 #(
     
     logic [8:0] state;             
     logic [1:0] current_symbol;    
-    logic [8:0] target_limit;      
+    logic [15:0] target_limit;     
+    logic [32:0] bitstream_reg;    
 
     assign final_state = state;
+    assign bitstream = bitstream_reg;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -64,8 +67,9 @@ module tANS_encoder_fsm_256 #(
             freq_cnt      <= 0;
             init_idx      <= 0;
             state         <= L; 
-            bit_valid     <= 0;
-            ready         <= 0;
+            bit_valid      <= 0;
+            ready          <= 0;
+            bitstream_reg  <= 0;
             for(int i=0; i<R; i++) counters[i] <= 0;
         end else begin
             bit_valid <= 1'b0;
@@ -122,9 +126,10 @@ module tANS_encoder_fsm_256 #(
                 
                 ENC_RENORM: begin
                     if (state >= target_limit) begin
-                        bit_out   <= state[0]; 
-                        bit_valid <= 1'b1;
-                        state     <= state >> 1;
+                        bit_out       <= state[0]; 
+                        bit_valid     <= 1'b1;
+                        bitstream_reg <= {bitstream_reg[31:0], state[0]};
+                        state         <= state >> 1;
                     end else begin
                         current_state <= ENC_UPDATE;
                     end
