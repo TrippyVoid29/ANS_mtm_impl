@@ -44,7 +44,7 @@ module tANS_encoder_fsm_256 #(
     assign freq[3] = 32;  
 
     logic [7:0] pos;          
-    logic [1:0] sym_idx;      
+    logic [2:0] sym_idx;      
     logic [7:0] freq_cnt;     
     logic [8:0] init_idx;     
     

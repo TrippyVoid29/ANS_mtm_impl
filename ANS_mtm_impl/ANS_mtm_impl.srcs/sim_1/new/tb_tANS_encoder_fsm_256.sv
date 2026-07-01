@@ -50,9 +50,13 @@ module tb_tANS_encoder_fsm_256;
         start_init = 1;
         #10 start_init = 0;
 
+        #15000;
         wait(ready == 1'b1);
         $display("[%0t] Inicjalizacja zakonczona. Uklad gotowy (READY).", $time);
-        #10; 
+        start_encode = 1;
+        #20; 
+        start_encode = 0;
+        #10;
 
 
         encode_symbol(2'd0, "A"); // 1 znak
