@@ -3,7 +3,7 @@
 module tb_tANS_system;
 
     // ==========================================
-    // 1. SYGNA£Y GLOBALNE
+    // 1. SYGNAï¿½Y GLOBALNE
     // ==========================================
     logic clk;
     logic rst_n;
@@ -20,35 +20,28 @@ module tb_tANS_system;
     logic       bit_valid_enc;
     logic       ready_enc;
     logic [8:0] final_state_enc;
+    logic [32:0] bitstream_enc;
 
     // ==========================================
     // 3. INTERFEJS DEKODERA
     // ==========================================
     logic        start_init_dec;
     logic        start_decode;
-    logic [8:0]  start_state_dec;
     logic [15:0] data_length_dec;
-    
-    logic        pop_bit_dec;
-    logic        bit_in_dec;
-    logic        lifo_empty_dec;
     
     logic [1:0]  symbol_out_dec;
     logic        symbol_valid_dec;
     logic        ready_dec;
 
     // ==========================================
-    // 4. STRUKTURY TESTOWE (WIRTUALNA PAMIÊÆ)
+    // 4. STRUKTURY TESTOWE
     // ==========================================
-    // LIFO (Last-In-First-Out) do przechowywania skompresowanych bitów
-    logic bitstream_lifo [$]; 
-    
-    // Tablice do przechowywania orygina³u i odkodowanych danych
+    // Tablice do przechowywania oryginaÅ‚u i odkodowanych danych
     logic [1:0] original_data [];
     logic [1:0] decoded_data [$];
 
     // ==========================================
-    // 5. INSTANCJONOWANIE MODU£ÓW (DUT)
+    // 5. INSTANCJONOWANIE MODUï¿½ï¿½W (DUT)
     // ==========================================
     tANS_encoder_fsm_256 #(.R(4), .L(256)) DUT_ENCODER (
         .clk(clk),
@@ -60,7 +53,8 @@ module tb_tANS_system;
         .bit_out(bit_out_enc),
         .bit_valid(bit_valid_enc),
         .ready(ready_enc),
-        .final_state(final_state_enc)
+        .final_state(final_state_enc),
+        .bitstream(bitstream_enc)
     );
 
     tANS_decoder_fsm_256 #(.R(4), .L(256)) DUT_DECODER (
@@ -68,47 +62,28 @@ module tb_tANS_system;
         .rst_n(rst_n),
         .start_init(start_init_dec),
         .start_decode(start_decode),
-        .start_state(start_state_dec),
+        .encoded_state(final_state_enc),
+        .bitstream(bitstream_enc),
         .data_length(data_length_dec),
-        .pop_bit(pop_bit_dec),
-        .bit_in(bit_in_dec),
-        .lifo_empty(lifo_empty_dec),
         .symbol_out(symbol_out_dec),
         .symbol_valid(symbol_valid_dec),
         .ready(ready_dec)
     );
 
     // ==========================================
-    // 6. GENERATOR ZEGARA I LOGIKA PAMIÊCI LIFO
+    // 6. GENERATOR ZEGARA
     // ==========================================
     initial begin
         clk = 0;
         forever #5 clk = ~clk; // Zegar 100 MHz (okres 10 ns)
     end
 
-    // Nagrywanie bitów z enkodera (Push)
+    // Logowanie bitÃ³w z enkodera
     always_ff @(posedge clk) begin
         if (bit_valid_enc) begin
-            bitstream_lifo.push_back(bit_out_enc);
             $display("   [ENKODER] Wypchnal bit: %b", bit_out_enc);
         end
     end
-
-    // Wydawanie bitów do dekodera (Pop)
-    // U¿ywamy zbocza opadaj¹cego, aby unikn¹æ hazardu (Race Condition) ze stanem FSM
-    always_ff @(negedge clk) begin
-        if (pop_bit_dec) begin
-            if (bitstream_lifo.size() > 0) begin
-                bit_in_dec <= bitstream_lifo.pop_back();
-                $display("   [DEKODER] Pobral bit. LIFO zmalalo do: %0d", bitstream_lifo.size());
-            end else begin
-                $display("   [!!! ERROR !!!] Dekoder zada bitu z pustego LIFO!");
-            end
-        end
-    end
-    
-    // Asynchroniczna flaga pustoœci LIFO
-    assign lifo_empty_dec = (bitstream_lifo.size() == 0);
 
     // Przechwytywanie zdekodowanych symboli
     always_ff @(posedge clk) begin
@@ -119,7 +94,7 @@ module tb_tANS_system;
     end
 
     // ==========================================
-    // 7. G£ÓWNY SCENARIUSZ TESTOWY
+    // 7. Gï¿½ï¿½WNY SCENARIUSZ TESTOWY
     // ==========================================
     initial begin
         $display("\n==============================================");
@@ -127,12 +102,12 @@ module tb_tANS_system;
         $display("==============================================\n");
 
         // Dane do przetestowania (0=A, 1=B, 2=C, 3=D)
-        // Dla tANS LIFO, znaki odzyskaj¹ siê odwrotnie do podania!
-        // Wiêc jeœli podamy {0, 2, 1, 3}, powinniœmy odzyskaæ {3, 1, 2, 0}.
+        // Dla tANS LIFO, znaki odzyskajï¿½ siï¿½ odwrotnie do podania!
+        // Wiï¿½c jeï¿½li podamy {0, 2, 1, 3}, powinniï¿½my odzyskaï¿½ {3, 1, 2, 0}.
         original_data = new[6];
         original_data = '{0, 2, 1, 3, 0, 0}; // {A, C, B, D, A, A}
 
-        // Inicjalizacja sygna³ów
+        // Inicjalizacja sygnaï¿½ï¿½w
         rst_n = 0;
         start_init_enc = 0; start_encode = 0; symbol_valid_enc = 0;
         start_init_dec = 0; start_decode = 0;
@@ -147,7 +122,7 @@ module tb_tANS_system;
         start_init_enc = 0;
         start_init_dec = 0;
 
-        // Czekamy na gotowoœæ (Enkoder buduje 2 tablice, dekoder 1, wiêc czekamy na enkodera)
+        // Czekamy na gotowoï¿½ï¿½ (Enkoder buduje 2 tablice, dekoder 1, wiï¿½c czekamy na enkodera)
         wait(ready_enc && ready_dec);
         $display("[Czas: %0t] Moduly gotowe. Poczatek kompresji...", $time);
 
@@ -156,24 +131,23 @@ module tb_tANS_system;
             send_symbol_to_encoder(original_data[i]);
         end
 
-        // Czekamy chwilê po ostatnim znaku na wypchniêcie resztek z FSM
+        // Czekamy chwilï¿½ po ostatnim znaku na wypchniï¿½cie resztek z FSM
         #50;
         wait(ready_enc);
         
         $display("\n[Czas: %0t] KOMPRESJA ZAKONCZONA.", $time);
-        $display("Rozmiar LIFO: %0d bitow.", bitstream_lifo.size());
+        $display("Bitstream enkodera: %0d", bitstream_enc);
         $display("Stan koncowy do przekazania: %0d", final_state_enc);
 
         // --- FAZA 3: DEKODOWANIE ---
         $display("\n[Czas: %0t] Start dekompresji...", $time);
         @(negedge clk);
-        start_state_dec = final_state_enc;
         data_length_dec = original_data.size();
         start_decode = 1;
         @(negedge clk);
         start_decode = 0;
 
-        // Czekamy na zakoñczenie dekompresji
+        // Czekamy na zakoï¿½czenie dekompresji
         wait(ready_dec);
         $display("\n[Czas: %0t] DEKOMPRESJA ZAKONCZONA.", $time);
 
@@ -201,7 +175,7 @@ module tb_tANS_system;
             symbol_valid_enc = 0;
             start_encode = 0;
             
-            wait(!ready_enc); // Czekamy a¿ uk³ad zajmie siê symbolem
+            wait(!ready_enc); // Czekamy aï¿½ ukï¿½ad zajmie siï¿½ symbolem
         end
     endtask
 
@@ -214,14 +188,14 @@ module tb_tANS_system;
         $display("");
         
         $write("Odkodowany (odebrany) : ");
-        // Wyœwietlamy odebrane bity (nale¿y pamiêtaæ o naturze LIFO tANS - bity wracaj¹ od ty³u!)
+        // KolejnoÅ›Ä‡ odczytu jest odwrotna do kolejnoÅ›ci wejÅ›ciowej w tym tANS-owym dekoderze
         for(int i=0; i<max_len; i++) $write("%0d ", decoded_data[max_len-1-i]);
         $display("\n");
         
-        // Pêtla sprawdzaj¹ca
+        // PÄ™tla sprawdzajÄ…ca
         for(int i=0; i<max_len; i++) begin
             if (original_data[i] !== decoded_data[max_len-1-i]) begin
-                $display("B³¹d na indeksie %0d: Oczekiwano %0d, otrzymano %0d", i, original_data[i], decoded_data[max_len-1-i]);
+                $display("BÅ‚Ä…d na indeksie %0d: Oczekiwano %0d, otrzymano %0d", i, original_data[i], decoded_data[max_len-1-i]);
                 errors++;
             end
         end

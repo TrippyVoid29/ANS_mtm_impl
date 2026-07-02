@@ -7,21 +7,15 @@ module tb_tANS_decoder_fsm_256;
 
     logic        start_init;
     logic        start_decode;
-    logic [8:0]  start_state;
+    logic [8:0]  encoded_state;
+    logic [32:0] bitstream;
     logic [15:0] data_length;
-
-    logic        pop_bit;
-    logic        bit_in;
-    logic        lifo_empty;
 
     logic [1:0]  symbol_out;
     logic        symbol_valid;
     logic        ready;
 
     int received_symbols;
-    int bit_index;
-    int bit_count;
-    logic [7:0] bitstream_data;
 
     tANS_decoder_fsm_256 #(
         .R(4),
@@ -31,11 +25,9 @@ module tb_tANS_decoder_fsm_256;
         .rst_n(rst_n),
         .start_init(start_init),
         .start_decode(start_decode),
-        .start_state(start_state),
+        .encoded_state(encoded_state),
+        .bitstream(bitstream),
         .data_length(data_length),
-        .pop_bit(pop_bit),
-        .bit_in(bit_in),
-        .lifo_empty(lifo_empty),
         .symbol_out(symbol_out),
         .symbol_valid(symbol_valid),
         .ready(ready)
@@ -49,35 +41,21 @@ module tb_tANS_decoder_fsm_256;
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             received_symbols <= 0;
-            bit_index        <= 0;
-            bit_in           <= 1'b0;
-        end else begin
-            if (symbol_valid) begin
-                received_symbols <= received_symbols + 1;
-                $display("[%0t] Zdekodowano symbol: %0d", $time, symbol_out);
-            end
-
-            if (pop_bit && bit_index < bit_count) begin
-                bit_in    <= bitstream_data[bit_index];
-                bit_index <= bit_index + 1;
-            end else if (pop_bit) begin
-                bit_in <= 1'b0;
-            end
+        end else if (symbol_valid) begin
+            received_symbols <= received_symbols + 1;
+            $display("[%0t] Zdekodowano symbol: %0d", $time, symbol_out);
         end
     end
-
-    assign lifo_empty = (bit_index >= bit_count);
 
     initial begin
         $display("=== Rozpoczecie symulacji dekodera tANS (L=256) ===");
 
-        rst_n        = 0;
-        start_init   = 0;
-        start_decode = 0;
-        start_state  = 0;
-        data_length  = 0;
-        bit_count    = 0;
-        bitstream_data = 8'b10100101;
+        rst_n          = 0;
+        start_init     = 0;
+        start_decode   = 0;
+        encoded_state  = 0;
+        bitstream      = 33'h1A5;
+        data_length    = 0;
 
         #20 rst_n = 1;
         #10;
@@ -89,13 +67,11 @@ module tb_tANS_decoder_fsm_256;
         wait(ready == 1'b1);
         $display("[%0t] Inicjalizacja zakonczona. Uklad gotowy (READY).", $time);
 
-        bit_count = 8;
-
-        $display("[%0t] Uruchamianie dekodowania z poczatkowym stanem %0d", $time, start_state);
+        $display("[%0t] Uruchamianie dekodowania z poczatkowym stanem %0d", $time, encoded_state);
         @(negedge clk);
-        start_state  = 9'd100;
-        data_length  = 4;
-        start_decode = 1;
+        encoded_state = 9'd100;
+        data_length   = 4;
+        start_decode  = 1;
         @(negedge clk);
         start_decode = 0;
 
